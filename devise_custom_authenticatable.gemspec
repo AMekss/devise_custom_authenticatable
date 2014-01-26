@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Artūrs Mekšs"]
   spec.email         = ["arturs.mekss@gmail.com"]
   spec.description   = %q{Simple way to customize devise authentication logic and still be inline with all other devise parts}
-  spec.summary       = %q{Extends Devise with new module :custom_authenticatable, when enabled it will call #valid_for_model_authentication? method on resource model for your customizations}
+  spec.summary       = %q{Extends Devise with new module :custom_authenticatable, when enabled it will call #valid_for_custom_authentication? method on resource model for your customizations}
   spec.homepage      = "https://github.com/AMekss/devise_custom_authenticatable"
   spec.license       = "MIT"
 
