@@ -1,0 +1,1 @@
+require 'devise_custom_authenticatable'
