@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["arturs.mekss@gmail.com"]
   spec.description   = %q{Simple way to customize devise authentication logic and still be inline with all other devise parts}
   spec.summary       = %q{Extends Devise with new module :custom_authenticatable, when used it will call #valid_for_model_authentication? method on resource model with password if such defined. Return true in order to authenticate user. If method isn't defined for model or return false/nil then authentication handling will be passed to next strategy e.g. :database_authenticatable, if there is no other strategies for resource then authentication will be failed}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/AMekss/devise_custom_authenticatable"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
