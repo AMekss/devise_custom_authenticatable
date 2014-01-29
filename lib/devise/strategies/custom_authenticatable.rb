@@ -6,10 +6,7 @@ module Devise::Strategies
 
     def authenticate!
       resource  = valid_password? && mapping.to.find_for_authentication(authentication_hash)
-
-      unless resource.respond_to?(:valid_for_custom_authentication?)
-        return pass
-      end
+      return pass unless resource.respond_to?(:valid_for_custom_authentication?)
 
       if validate(resource){ resource.valid_for_custom_authentication?(password) }
         success!(resource)
