@@ -70,6 +70,7 @@ It will call all `authenticated_by_<strategy_name>_strategy?(password)` in turn 
 ## TODO
 
 * Check compatibility with older versions (~> 2.0) of Devise.
+* Write Integration tests
 
 ## Contributing
 
