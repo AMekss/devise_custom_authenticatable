@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/AMekss/devise_custom_authenticatable.png?branch=master)](https://travis-ci.org/AMekss/devise_custom_authenticatable)
+
 # DeviseCustomAuthenticatable
 
 This gem is extension for [Devise](http://github.com/plataformatec/devise) authentication. It provides custom strategy via extended module `:custom_authenticatable` which is simple way how to customize Devise authentication logic but stay inline with all other features e.g. modules `:rememberable`, `:lockable`, `:timeoutable`, default controllers and even views if you like. `:custom_authenticatable` can work together with Devise default authentication strategy `:database_authenticatable` or on its own.
