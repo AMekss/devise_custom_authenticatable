@@ -32,6 +32,7 @@ Or install it yourself as:
     # AND
 
     def valid_for_custom_authentication?(password)
+      # Your authentication logic goes here and returns either true or false
       LDAP.authenticate(self.username, password)
     end
 
@@ -46,7 +47,7 @@ This gem also provide handy helper `#authenticated_by_any_custom_strategy?` for 
       end
 
       def authenticated_by_development_strategy?(password)
-        if %w{development test demo}.include?(Rails.env.development?)
+        if %w{development test demo}.include?(Rails.env)
           password == 'dummy'
         end
       end
