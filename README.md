@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/AMekss/devise_custom_authenticatable.png?branch=master)](https://travis-ci.org/AMekss/devise_custom_authenticatable)
+[![Build Status](https://travis-ci.org/AMekss/devise_custom_authenticatable.png?branch=master)](https://travis-ci.org/AMekss/devise_custom_authenticatable)
 
 # DeviseCustomAuthenticatable
 
