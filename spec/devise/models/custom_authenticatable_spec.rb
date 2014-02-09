@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-class CustomAuthenticatableTestClass
-  include Devise::Models::CustomAuthenticatable
-end
-
 describe Devise::Models::CustomAuthenticatable do
   before(:each) do
     @it = CustomAuthenticatableTestClass.new
