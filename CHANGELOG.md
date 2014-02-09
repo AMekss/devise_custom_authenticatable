@@ -9,3 +9,7 @@
 ## v0.1.0
 
 * Feature: generate session routes for :custom_authenticatable strategy
+
+## v0.1.1
+
+* Checked and confirmed that all functionality work with devise >= 2.0
