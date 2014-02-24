@@ -13,3 +13,8 @@
 ## v0.1.1
 
 * Checked and confirmed that all functionality work with devise >= 2.0
+
+## v0.2.0
+
+* Feature: fail authentication if `#valid_for_custom_authentication?` returns false (use `#skip_custom_strategies` in order to pass to another stategy)
+* Feature: `#after_custom_authentication` method added
