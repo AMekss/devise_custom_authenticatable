@@ -24,43 +24,28 @@ describe Devise::Models::CustomAuthenticatable do
       expect(@it.authenticate!).to eq 'skip'
     end
 
-    it "should pass to another strategy if #valid_for_custom_authentication? is defined but return false" do
+    it "should pass to another strategy if #skip_custom_strategies called in #valid_for_custom_authentication?" do
+      expect(@resource).to receive(:valid_for_custom_authentication?).with('password') do
+        @resource.skip_custom_strategies
+      end
+      expect(@it).to receive(:success!).never
+      @it.authenticate!
+    end
+
+    it "should fail if #valid_for_custom_authentication? is defined and return false" do
       expect(@resource).to receive(:valid_for_custom_authentication?).with('password').and_return(false)
-      expect(@it).to receive(:validate).once
-      expect(@it).to receive(:pass).once.and_return('skip')
-      expect(@it.authenticate!).to eq 'skip'
+      expect(@it).to receive(:pass).never
+      expect(@it).to receive(:success!).never
+      @it.authenticate!
     end
 
     it "should return with success! if #valid_for_custom_authentication? is defined and return true" do
       expect(@resource).to receive(:valid_for_custom_authentication?).with('password').and_return(true)
       expect(@it).to receive(:pass).never
-      expect(@it).to receive(:validate).once
       expect(@it).to receive(:success!).once.with(@resource).and_return('success')
       expect(@it.authenticate!).to eq 'success'
     end
-  end
 
-  describe "#validate" do
-    before(:each) do
-      @block = -> { }
-    end
-
-    it "should return false if resource is nil" do
-      expect(@it).to receive(:decorate).never
-      expect(@it.validate(nil, &@block)).to be_false
-    end
-
-    it "should return false if valid_for_authentication? on resource return false" do
-      expect(@resource).to receive(:valid_for_authentication?).with(&@block).and_return(false)
-      expect(@it).to receive(:decorate).never
-      expect(@it.validate(@resource, &@block)).to be_false
-    end
-
-    it "should return true and decorate resource if valid_for_authentication? on resource return true" do
-      expect(@resource).to receive(:valid_for_authentication?).with(&@block).and_return(true)
-      expect(@it).to receive(:decorate).with(@resource)
-      expect(@it.validate(@resource, &@block)).to be_true
-    end
   end
 
 end

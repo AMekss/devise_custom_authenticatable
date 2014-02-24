@@ -25,7 +25,7 @@ Or install it yourself as:
 
 ## Usage
 
-[Devise](http://github.com/plataformatec/devise) should be already installed and enabled for any resource in your app. Open Devise enabled model and add `:custom_authenticatable`. When strategy is enabled it'll try to call `#valid_for_custom_authentication?` method on resource model with password. Define this method and return true in order to authenticate user. If there is no such method for model or it returns false/nil then authentication handling will be passed to next strategy e.g. `:database_authenticatable`, if there is no other strategies left for resource then authentication will be failed. For example:
+[Devise](http://github.com/plataformatec/devise) should be already installed and enabled for any resource in your app. Open Devise enabled model and add `:custom_authenticatable`. When strategy is enabled it'll try to call `#valid_for_custom_authentication?` method on resource model with password. Define this method and return true in order to authenticate user or false in order to fail authentication. If there is no such method for model then authentication handling will be passed to next strategy e.g. `:database_authenticatable`, if there is no other strategies left for resource then authentication will be failed. For example:
 
 ```ruby
     devise :custom_authenticatable, :database_authenticatable, :trackable, :lockable, :timeoutable
@@ -40,7 +40,9 @@ Or install it yourself as:
     end
 ```
 
-This gem also provide handy helper `#authenticated_by_any_custom_strategy?` for managing your custom authentication methods. For example you would like to provide LDAP authentication for users, but also would like to have some dummy password in development environments. You can write something like this:
+###This gem also provide few handy helpers
+
+Use `#authenticated_by_any_custom_strategy?` when for example you would like to provide LDAP authentication for users, but also would like to have some dummy password in development environments. You can write something like this:
 
 ```ruby
     class User
@@ -75,6 +77,22 @@ It will call all `authenticated_by_<strategy_name>_strategy?(password)` in turn 
     end
 ```
 
+Use `#skip_custom_strategies` when you would like to conditionaly skip entire custom authentication, so for example in order to provide some custom care for admin users you could write something like this:
+
+```ruby
+    class User
+      devise :custom_authenticatable, :trackable, :lockable, :timeoutable
+      # ...
+
+      def valid_for_custom_authentication?(password)
+        if self.has_role?(:admin)
+          # Your admin user authentication logic goes here and returns either true or false
+        else
+          skip_custom_strategies
+        end
+      end
+    end
+```
 
 ## TODO
 

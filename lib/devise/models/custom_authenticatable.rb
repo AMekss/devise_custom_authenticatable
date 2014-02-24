@@ -14,5 +14,9 @@ module Devise::Models
       end
     end
 
+    def skip_custom_strategies
+      throw :skip_custom_strategies
+    end
+
   end
 end
