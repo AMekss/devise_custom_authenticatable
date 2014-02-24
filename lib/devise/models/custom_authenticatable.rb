@@ -18,5 +18,12 @@ module Devise::Models
       throw :skip_custom_strategies
     end
 
+    # A callback initiated after successfully authenticating. This can be
+    # used to insert your own logic that is only run after the user successfully
+    # authenticates.
+    def after_custom_authentication
+
+    end
+
   end
 end

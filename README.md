@@ -94,6 +94,9 @@ Use `#skip_custom_strategies` when you would like to conditionaly skip entire cu
     end
 ```
 
+Use `#after_custom_authentication` in order to insert your own logic that is only run after the user successfully authenticates
+
+
 ## TODO
 
 * Write Integration tests
