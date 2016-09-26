@@ -1,7 +1,7 @@
 require 'devise/strategies/authenticatable'
 
 module Devise::Strategies
-  # Strategy for delegateing authentication logic to custom model's method
+  # Strategy for delegating authentication logic to custom model's method
   class CustomAuthenticatable < Authenticatable
 
     def authenticate!
