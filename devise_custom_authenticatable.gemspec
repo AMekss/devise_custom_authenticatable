@@ -21,7 +21,17 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 2.0"
-  spec.add_development_dependency "activemodel", ">= 3.1"
 
-  spec.add_dependency "devise", ">= 2", "< 5"
+
+  if defined?(RUBY_VERSION) && RUBY_VERSION >= "2.1" || defined?(JRUBY_VERSION) && JRUBY_VERSION >= "9000"
+    spec.add_development_dependency "activemodel", ">= 3.1"
+
+    spec.add_dependency "devise", ">= 2", "< 5"
+  else
+    spec.add_development_dependency "activemodel", "< 5"
+    spec.add_development_dependency "activesupport", "< 5"
+    spec.add_development_dependency "rack", "~> 1.6.4"
+
+    spec.add_dependency "devise", ">= 2", "< 4"
+  end
 end
