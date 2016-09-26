@@ -21,18 +21,18 @@ describe Devise::Models::CustomAuthenticatable do
         expect(@it).to receive(:authenticated_by_test1_strategy?).with('password').and_return(false)
         expect(@it).to receive(:authenticated_by_test2_strategy?).and_return(false)
 
-        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_false
+        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_falsey
       end
 
       it "return true if any of them return true" do
         expect(@it).to receive(:authenticated_by_test1_strategy?).with('password').and_return(false)
         expect(@it).to receive(:authenticated_by_test2_strategy?).and_return(true)
 
-        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_true
+        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_truthy
       end
 
       it "return true if all of them return true" do
-        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_true
+        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_truthy
       end
     end
   end
