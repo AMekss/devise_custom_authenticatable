@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Devise::Models::CustomAuthenticatable do
+RSpec.describe Devise::Models::CustomAuthenticatable do
   before(:each) do
     @resource = CustomAuthenticatableTestClass.new
     @it = Devise::Strategies::CustomAuthenticatable.new(env_with_params, :user)
@@ -8,17 +6,19 @@ describe Devise::Models::CustomAuthenticatable do
 
   describe "#authenticate!" do
     before(:each) do
-      password_hash = { password: 'password' }
-      @it.stub( password_hash )
-      @it.stub(authentication_hash: password_hash)
-      @it.stub_chain(:mapping, :to, :find_for_authentication).and_return(@resource)
-      @it.stub(:validate) do |resource, &block|
+      allow(@it).to receive(:password).and_return('password')
+      allow(@it).to receive(:authentication_hash).and_return(password: 'password')
+      allow(@it).to receive_message_chain("mapping.to.find_for_authentication").and_return(@resource)
+
+      allow(@it).to receive(:validate) do |resource, &block|
         expect(resource).to eq @resource
         block.call
       end
     end
 
     it "should pass to another strategy if #valid_for_custom_authentication? is not defined" do
+      @resource.instance_eval('undef :valid_for_custom_authentication?')
+
       expect(@resource).to receive(:after_custom_authentication).never
       expect(@it).to receive(:validate).never
       expect(@it).to receive(:pass).once.and_return('skip')
