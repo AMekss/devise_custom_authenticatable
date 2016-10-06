@@ -1,5 +1,9 @@
 class CustomAuthenticatableTestClass
   include Devise::Models::CustomAuthenticatable
+
+  def valid_for_custom_authentication?(*args); end
+  def authenticated_by_test1_strategy?(*args); end
+  def authenticated_by_test2_strategy?(*args); end
 end
 
 def env_with_params(path = "/", params = {}, env = {})

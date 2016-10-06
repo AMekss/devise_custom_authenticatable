@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Devise::Models::CustomAuthenticatable do
+RSpec.describe Devise::Models::CustomAuthenticatable do
   before(:each) do
     @it = CustomAuthenticatableTestClass.new
   end
@@ -12,8 +10,8 @@ describe Devise::Models::CustomAuthenticatable do
 
   describe "#authenticated_by_any_custom_strategy? helper" do
     before(:each) do
-      @it.stub(authenticated_by_test1_strategy?: true)
-      @it.stub(authenticated_by_test2_strategy?: true)
+      allow(@it).to receive(:authenticated_by_test1_strategy?).and_return(true)
+      allow(@it).to receive(:authenticated_by_test2_strategy?).and_return(true)
     end
 
     context "should call all given strategy methods and" do
