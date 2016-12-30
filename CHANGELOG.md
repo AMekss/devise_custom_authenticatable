@@ -22,3 +22,7 @@
 ## v0.3.0
 
 * works with devise 4.2
+
+## v0.3.1
+
+* Fix: conflict of password writer when used together with :database_authenticatable module
