@@ -6,6 +6,16 @@ RSpec.describe Devise::Models::CustomAuthenticatable do
     expect(resource.password).to eq 'password'
   end
 
+  context "when password setter already defined for resource model" do
+    subject(:resource) { CustomAuthenticatableTestClassWithPasswordWriter.new }
+
+    it "preserves original setter" do
+      resource.password = 'password'
+      expect(resource.password).to eq 'password'
+      expect(resource.encrypted_password).to eq 'password_encrypted'
+    end
+  end
+
   describe "#authenticated_by_any_custom_strategy? helper" do
     before(:each) do
       allow(resource).to receive(:authenticated_by_test1_strategy?).and_return(true)
