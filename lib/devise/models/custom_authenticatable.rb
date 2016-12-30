@@ -5,7 +5,12 @@ module Devise::Models
     extend ActiveSupport::Concern
 
     included do
-      attr_accessor :password
+      attr_reader :password
+    end
+
+    def password=(password)
+      @password = password
+      super if defined?(super)
     end
 
     def authenticated_by_any_custom_strategy?(password, *strategies)
@@ -21,9 +26,6 @@ module Devise::Models
     # A callback initiated after successfully authenticating. This can be
     # used to insert your own logic that is only run after the user successfully
     # authenticates.
-    def after_custom_authentication
-
-    end
-
+    def after_custom_authentication; end
   end
 end

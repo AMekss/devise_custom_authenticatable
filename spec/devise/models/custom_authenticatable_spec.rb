@@ -1,38 +1,45 @@
 RSpec.describe Devise::Models::CustomAuthenticatable do
-  before(:each) do
-    @it = CustomAuthenticatableTestClass.new
+  subject(:resource) { CustomAuthenticatableTestClass.new }
+
+  it "defines password attribute accessors" do
+    resource.password = 'password'
+    expect(resource.password).to eq 'password'
   end
 
-  it "password attribute accessors should be defined" do
-    @it.password = 'password'
-    expect(@it.password).to eq 'password'
+  context "when password setter already defined for resource model" do
+    subject(:resource) { CustomAuthenticatableTestClassWithPasswordWriter.new }
+
+    it "preserves original setter" do
+      resource.password = 'password'
+      expect(resource.password).to eq 'password'
+      expect(resource.encrypted_password).to eq 'password_encrypted'
+    end
   end
 
   describe "#authenticated_by_any_custom_strategy? helper" do
     before(:each) do
-      allow(@it).to receive(:authenticated_by_test1_strategy?).and_return(true)
-      allow(@it).to receive(:authenticated_by_test2_strategy?).and_return(true)
+      allow(resource).to receive(:authenticated_by_test1_strategy?).and_return(true)
+      allow(resource).to receive(:authenticated_by_test2_strategy?).and_return(true)
     end
 
     context "should call all given strategy methods and" do
-      it "return false if all of them return false" do
-        expect(@it).to receive(:authenticated_by_test1_strategy?).with('password').and_return(false)
-        expect(@it).to receive(:authenticated_by_test2_strategy?).and_return(false)
+      it "returns false if all of them return false" do
+        expect(resource).to receive(:authenticated_by_test1_strategy?).with('password').and_return(false)
+        expect(resource).to receive(:authenticated_by_test2_strategy?).and_return(false)
 
-        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_falsey
+        expect(resource.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_falsey
       end
 
-      it "return true if any of them return true" do
-        expect(@it).to receive(:authenticated_by_test1_strategy?).with('password').and_return(false)
-        expect(@it).to receive(:authenticated_by_test2_strategy?).and_return(true)
+      it "returns true if any of them return true" do
+        expect(resource).to receive(:authenticated_by_test1_strategy?).with('password').and_return(false)
+        expect(resource).to receive(:authenticated_by_test2_strategy?).and_return(true)
 
-        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_truthy
+        expect(resource.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_truthy
       end
 
-      it "return true if all of them return true" do
-        expect(@it.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_truthy
+      it "returns true if all of them return true" do
+        expect(resource.authenticated_by_any_custom_strategy?('password', :test1, :test2)).to be_truthy
       end
     end
   end
-
 end
