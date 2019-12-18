@@ -21,7 +21,7 @@ Or install it yourself as:
 
 ##Prerequisites
 
-* devise >= 2.0
+* devise >= 4.7.1
 
 ## Usage
 
