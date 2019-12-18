@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "activemodel", ">= 3.1"
-  spec.add_dependency "devise", ">= 2", "< 5"
+  spec.add_dependency "devise", ">= 4.7.1"
 end
