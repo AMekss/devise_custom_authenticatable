@@ -22,18 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry"
-
-
-  if defined?(RUBY_VERSION) && RUBY_VERSION >= "2.1" || defined?(JRUBY_VERSION) && JRUBY_VERSION >= "9000"
-    spec.add_development_dependency "activemodel", ">= 3.1"
-
-    spec.add_dependency "devise", ">= 2", "< 5"
-  else
-    spec.add_development_dependency "activemodel", "< 5"
-    spec.add_development_dependency "activesupport", "< 5"
-    spec.add_development_dependency "rack", "~> 1.6.4"
-    spec.add_development_dependency "nokogiri", "~> 1.8.2"
-
-    spec.add_dependency "devise", ">= 2", "< 4"
-  end
+  spec.add_development_dependency "activemodel", ">= 3.1"
+  spec.add_dependency "devise", ">= 2", "< 5"
 end
