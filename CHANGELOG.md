@@ -26,3 +26,9 @@
 ## v0.3.1
 
 * Fix: conflict of password writer when used together with :database_authenticatable module
+
+## v0.4.0
+
+* Dropping support for old ruby versions e.g. 2.3.1, jruby-1.7.26, jruby-9.1.5.0
+* Updating ruby versions for CI to 2.5.7, jruby-9.2.9.0
+* Dropping support for old devise versions due to security issues
